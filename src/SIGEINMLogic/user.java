@@ -14,6 +14,7 @@ public class user {
     private String id;
     private String name;
     private String password;
+    /*blej*/
     private String role;
     
     public user(String id, String name, String password, String role)
