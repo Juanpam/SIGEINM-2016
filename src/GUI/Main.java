@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyecto;
+package GUI;
 
+import DBconnect.DBconnect;
 import javax.swing.JOptionPane;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -18,12 +19,12 @@ public class Main extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public Main() {
+        
         initComponents();
-        Image imagen = Toolkit.getDefaultToolkit().getImage("src/proyecto/Icon.png");
+        Image imagen = Toolkit.getDefaultToolkit().getImage("src/GUI/Icon.png");
         this.setIconImage(imagen);
         this.setLocationRelativeTo(null);
-        //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("unnamed.png")));
-        //this.setVisible(true);
+     
     }
 
     /**
@@ -55,6 +56,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SIGEINM 2016 ™");
         setIconImages(null);
         setResizable(false);
 
@@ -75,7 +77,7 @@ public class Main extends javax.swing.JFrame {
 
         jLabel2.setText("Contraseña:");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/logo.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,11 +132,21 @@ public class Main extends javax.swing.JFrame {
         }
         else{
             DBconnect connect = new DBconnect();
-            if(connect.verifyUser(usuario,password)){
-                System.out.println("Logre ingresar, datos validos");
+            if(connect.isConnected()){
+                if (connect.verifyUser(usuario,password)){
+                    String role = connect.getRole(usuario);
+                    if(role.equals("ADMINISTRADOR")){
+                        AdminDialog adminDialog = new AdminDialog(this,true,connect.getName(usuario),role);
+                    }
+                    jTextField1.setText("");
+                    jPasswordField1.setText("");
+                }
+                else{
+                    JOptionPane.showMessageDialog(jFrame1, "El usuario y/o contraseña son incorrectos.","",JOptionPane.INFORMATION_MESSAGE);
+                }                
             }
             else{
-                System.out.println("Datos malisimos");
+                JOptionPane.showMessageDialog(this, "No se ha podido establecer una conexion con la base de datos","Error de conexión",JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -170,12 +182,6 @@ public class Main extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        
-        //DBconnect connect = new DBconnect();
-        
-        
-    	//connect.getData();
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
