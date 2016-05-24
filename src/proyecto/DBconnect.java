@@ -23,7 +23,7 @@ public class DBconnect {
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("Build Successful");
 			
-			con = DriverManager.getConnection("jdbc:mysql://172.17.65.133:3306/test?autoReconnect=true&useSSL=false","root","root");
+			con = DriverManager.getConnection("jdbc:mysql://192.168.250.173:3306/test?autoReconnect=true&useSSL=false","root","root");
 			st = con.createStatement();
 			
 		}catch(Exception ex){
@@ -54,7 +54,7 @@ public class DBconnect {
         public boolean verifyUser(String user, String password ){
 		try{
 			boolean ans=false;
-			String query = "select * from people where (id="+user+"AND password="+password+")";
+			String query = "select * from user where (id=\""+user+"\" AND password=\""+password+"\")";
 			rs = st.executeQuery(query);
 			//System.out.println("Records from database");
 			if (rs.next()){
