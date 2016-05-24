@@ -16,20 +16,20 @@ public class DBconnect {
 	private Connection con;
 	private Statement st;
 	private ResultSet rs;
-	
+	private boolean Connected;
 	public DBconnect(){
 		try{
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("Build Successful");
-			
 			con = DriverManager.getConnection("jdbc:mysql://192.168.250.173:3306/test?autoReconnect=true&useSSL=false","root","root");
 			st = con.createStatement();
+                        Connected=true;
 			
 		}catch(Exception ex){
 			
 			System.out.println("Error: "+ex);
-				
+                        Connected=false;
 		}
 	}
 	
@@ -51,10 +51,10 @@ public class DBconnect {
 		
 		
 	}
-        public boolean verifyUser(String user, String password ){
+        public boolean verifyUser(String userId, String password ){
 		try{
 			boolean ans=false;
-			String query = "select * from user where (id=\""+user+"\" AND password=\""+password+"\")";
+			String query = "select * from user where (id=\""+userId+"\" AND password=\""+password+"\")";
 			rs = st.executeQuery(query);
 			//System.out.println("Records from database");
 			if (rs.next()){
@@ -69,7 +69,42 @@ public class DBconnect {
 		
 		
 	}
+        public String getRole(String userId){
+            
+            /*This method gets a user role from the DB given his id
+            Precondition: The user exists on the DB*/
+            try{
+                String ans;
+                String query = "select * from user where (id=\""+userId+"\")";
+                rs = st.executeQuery(query);
+                //System.out.println("Records from database");
+                rs.next();
+                ans=rs.getString("role");
+                return ans;
+            }catch(Exception ex) {
+                System.out.println(ex);
+                return "";
+            }
+        }
         
-       
-
+        public String getName(String userId){
+            
+            /*This method gets a user role from the DB given his id
+            Precondition: The user exists on the DB*/
+            try{
+                String ans;
+                String query = "select * from user where (id=\""+userId+"\")";
+                rs = st.executeQuery(query);
+                //System.out.println("Records from database");
+                rs.next();
+                ans=rs.getString("name");
+                return ans;
+            }catch(Exception ex) {
+                System.out.println(ex);
+                return "";
+            }
+        }
+        public boolean isConnected(){
+            return Connected;
+        }
 }
