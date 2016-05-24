@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyecto;
+package GUI;
 
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -54,7 +54,6 @@ public class AdminDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SIGEINM : ADMINISTRADOR");
-        setPreferredSize(new java.awt.Dimension(500, 400));
         setResizable(false);
 
         jButton1.setText("Crear Propiedad");

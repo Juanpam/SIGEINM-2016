@@ -1,4 +1,4 @@
-package proyecto;
+package DBconnect;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,14 +21,14 @@ public class DBconnect {
 		try{
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			System.out.println("Build Successful");
+			//System.out.println("Build Successful");
 			con = DriverManager.getConnection("jdbc:mysql://192.168.250.173:3306/test?autoReconnect=true&useSSL=false","root","root");
 			st = con.createStatement();
                         Connected=true;
 			
 		}catch(Exception ex){
 			
-			System.out.println("Error: "+ex);
+			//System.out.println("Error: "+ex);
                         Connected=false;
 		}
 	}

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyecto;
+package GUI;
 
+import DBconnect.DBconnect;
 import javax.swing.JOptionPane;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -20,7 +21,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         
         initComponents();
-        Image imagen = Toolkit.getDefaultToolkit().getImage("src/proyecto/Icon.png");
+        Image imagen = Toolkit.getDefaultToolkit().getImage("src/GUI/Icon.png");
         this.setIconImage(imagen);
         this.setLocationRelativeTo(null);
      
@@ -76,7 +77,7 @@ public class Main extends javax.swing.JFrame {
 
         jLabel2.setText("Contraseña:");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/logo.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
