@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
 
@@ -29,7 +30,7 @@ public class AdminDialog extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         jLabel1.setText("Usuario: "+name);
         jLabel2.setText("Rol: "+role);
-        Image imagen = Toolkit.getDefaultToolkit().getImage("src/proyecto/Icon.png");
+        Image imagen = Toolkit.getDefaultToolkit().getImage("src/GUI/Icon.png");
         this.setIconImage(imagen);
         this.setVisible(true);
     }
@@ -66,6 +67,11 @@ public class AdminDialog extends javax.swing.JDialog {
         });
 
         jButton3.setText("Crear Usuario");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("Usuario: ");
@@ -152,6 +158,11 @@ public class AdminDialog extends javax.swing.JDialog {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        createUserDialog dialog = new createUserDialog((Frame) this.getParent(),true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
