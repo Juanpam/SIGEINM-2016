@@ -9,6 +9,7 @@ package SIGEINMLogic;
  *
  * @author Minos
  */
+//PruebaComentario
 public class user {
     /*This class implements the user system on the SIGEINM system.*/
     private String id;
