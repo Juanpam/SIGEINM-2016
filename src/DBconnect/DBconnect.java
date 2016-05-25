@@ -22,7 +22,7 @@ public class DBconnect {
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			//System.out.println("Build Successful");
-			con = DriverManager.getConnection("jdbc:mysql://192.168.250.173:3306/test?autoReconnect=true&useSSL=false","root","root");
+			con = DriverManager.getConnection("jdbc:mysql://10.147.17.226:3306/test?autoReconnect=true&useSSL=false","root","root");
 			st = con.createStatement();
                         Connected=true;
 			
