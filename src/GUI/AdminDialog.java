@@ -160,8 +160,9 @@ public class AdminDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
+        this.setVisible(false);
         createUserDialog dialog = new createUserDialog((Frame) this.getParent(),true);
+        this.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

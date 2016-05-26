@@ -136,7 +136,9 @@ public class Main extends javax.swing.JFrame {
                 if (connect.verifyUser(usuario,password)){
                     String role = connect.getRole(usuario);
                     if(role.equals("ADMINISTRADOR")){
+                        this.setVisible(false); //We set the visibility to false so the user only sees one window at a time
                         AdminDialog adminDialog = new AdminDialog(this,true,connect.getName(usuario),role);
+                        this.setVisible(true); //We set the visibility to true again after the dialog has finished
                     }
                     jTextField1.setText("");
                     jPasswordField1.setText("");
