@@ -146,6 +146,16 @@ public class Main extends javax.swing.JFrame {
                         AdminDialog adminDialog = new AdminDialog(this,true,connect.getName(usuario),role);
                         this.setVisible(true); //We set the visibility to true again after the dialog has finished
                     }
+                    else if(role.equals("ASESOR")){
+                        this.setVisible(false); //We set the visibility to false so the user only sees one window at a time
+                        AdviserDialog adviserDialog = new AdviserDialog(this,true,connect.getName(usuario),role);
+                        this.setVisible(true); //We set the visibility to true again after the dialog has finished
+                    }
+                    else if(role.equals("OFICINISTA")){
+                        this.setVisible(false); //We set the visibility to false so the user only sees one window at a time
+                        OfficeDialog officeDialog = new OfficeDialog(this,true,connect.getName(usuario),role);
+                        this.setVisible(true); //We set the visibility to true again after the dialog has finished
+                    }
                     jTextField1.setText("");
                     jPasswordField1.setText("");
                 }
