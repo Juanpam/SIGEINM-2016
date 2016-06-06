@@ -26,4 +26,24 @@ public class user {
         
     }
     
+    public String getId()
+    {
+        return this.id;
+    }
+    public String getName()
+    {
+        return this.name;
+    }
+    public String getPassword()
+    {
+        return this.password;
+    }
+    public String getRole()
+    {
+        return this.role;
+    }
+    public boolean checkFields()
+    {
+        return true;
+    }
 }

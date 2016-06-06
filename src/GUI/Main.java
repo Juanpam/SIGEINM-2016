@@ -18,6 +18,11 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
+    private String userID;
+    
+    public String getCurrentUserID(){
+        return userID;
+}
     public Main() {
         
         initComponents();
@@ -133,7 +138,8 @@ public class Main extends javax.swing.JFrame {
         else{
             DBconnect connect = new DBconnect();
             if(connect.isConnected()){
-                if (connect.verifyUser(usuario,password)){
+                if (connect.verifyUserPassword(usuario,password)){
+                    userID = usuario;
                     String role = connect.getRole(usuario);
                     if(role.equals("ADMINISTRADOR")){
                         this.setVisible(false); //We set the visibility to false so the user only sees one window at a time

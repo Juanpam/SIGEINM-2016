@@ -10,6 +10,7 @@ package DBconnect;
  *
  * @author Paula
  */
+import SIGEINMLogic.user;
 import java.sql.*;
 
 public class DBconnect {
@@ -51,7 +52,38 @@ public class DBconnect {
 		
 		
 	}
-        public boolean verifyUser(String userId, String password ){
+        public boolean createUser(user usuario)
+        {
+            try{
+			
+			String query = "INSERT INTO user VALUES ("+"'"+usuario.getId()+"',"+"'"+usuario.getName()+"',"
+                                +"'"+usuario.getPassword()+"',"+"'"+usuario.getRole()+"'"+")";
+			PreparedStatement pstm = this.con.prepareStatement(query);
+                        pstm.execute();
+                        pstm.close();
+			return true;
+			
+		}catch(Exception ex){
+			System.out.println(ex);
+                        return false;
+		}
+        }
+        public boolean deleteUser(String ID)
+        {
+            try{
+			
+			String query = "DELETE FROM user WHERE (id=\""+ID+"\")";
+			PreparedStatement pstm = this.con.prepareStatement(query);
+                        pstm.execute();
+                        pstm.close();
+			return true;
+			
+		}catch(Exception ex){
+			System.out.println(ex);
+                        return false;
+		}
+        }
+        public boolean verifyUserPassword(String userId, String password ){
 		try{
 			boolean ans=false;
 			String query = "select * from user where (id=\""+userId+"\" AND password=\""+password+"\")";
@@ -65,9 +97,23 @@ public class DBconnect {
 		}catch(Exception ex){
 			System.out.println(ex);
                         return false;
-		}
-		
-		
+		}	
+	}
+        public boolean verifyUser(String userId){
+		try{
+			boolean ans=false;
+			String query = "select * from user where (id=\""+userId+"\")";
+			rs = st.executeQuery(query);
+			//System.out.println("Records from database");
+			if (rs.next()){
+                            ans=true;
+			}
+                        return ans;
+			
+		}catch(Exception ex){
+			System.out.println(ex);
+                        return false;
+		}	
 	}
         public String getRole(String userId){
             
@@ -89,7 +135,7 @@ public class DBconnect {
         
         public String getName(String userId){
             
-            /*This method gets a user role from the DB given his id
+            /*This method gets a user name from the DB given his id
             Precondition: The user exists on the DB*/
             try{
                 String ans;
