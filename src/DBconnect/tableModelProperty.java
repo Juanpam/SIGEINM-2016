@@ -13,26 +13,42 @@ import javax.swing.table.AbstractTableModel;
  */
 public class tableModelProperty extends AbstractTableModel{
     private DBconnect connect;
-
     @Override
     public int getRowCount() {
-        connect = new DBconnect();
+        if (connect==null)
+        {
+            connect = new DBconnect();
+        }
         int ans = connect.countRowsTable("property");
-        System.out.println("Hay "+ans+" filas");
+        //System.out.println("Hay "+ans+" filas");
         return ans;
     }
 
     @Override
     public int getColumnCount() {
-        connect = new DBconnect();
+        if (connect==null)
+        {
+            connect = new DBconnect();
+        }
         int ans = connect.countColumnsTable("property");
-        System.out.println("Hay "+ans+" columnas");
+        //System.out.println("Hay "+ans+" columnas");
         return ans;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        connect = new DBconnect();
+        if (connect==null)
+        {
+            connect = new DBconnect();
+        }
         return connect.getValueByIndex(rowIndex, columnIndex, "property");
+    }
+    @Override
+    public String getColumnName(int col) {
+        if (connect==null)
+        {
+            connect = new DBconnect();
+        }
+        return connect.getColumnName(col, "property");
     }
 }

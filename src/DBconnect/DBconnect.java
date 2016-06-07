@@ -23,12 +23,12 @@ public class DBconnect {
 		try{
                     Class.forName("com.mysql.jdbc.Driver");
                     //System.out.println("Build Successful");
-                    con = DriverManager.getConnection("jdbc:mysql://10.147.17.226:3306/test?autoReconnect=true&useSSL=false","root","root");
+                    con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/test?autoReconnect=true&useSSL=false","root","");
                     st = con.createStatement();
                     Connected=true;
 			
 		}catch(Exception ex){
-                    //System.out.println("Error: "+ex);
+                    System.out.println("Error: "+ex);
                     Connected=false;
 		}
 	}
@@ -243,7 +243,25 @@ public class DBconnect {
                 rs = st.executeQuery(query);
                 //System.out.println("Records from database");
                 rs.absolute(rowIndex+1);
-                ans=rs.getString(columnIndex);
+                ans=rs.getString(columnIndex+1);
+                return ans;
+            }catch(Exception ex) {
+                System.out.println(ex);
+                return "";
+            }
+        }
+        
+        public String getColumnName(int columnIndex, String tableName){
+            
+            try{
+                String ans;
+                String query = "SELECT Column_name FROM INFORMATION_SCHEMA.COLUMNS " +
+                                "WHERE table_schema = 'test'" +
+                                "AND table_name ='"+tableName+"'";
+                rs = st.executeQuery(query);
+                //System.out.println("Records from database");
+                rs.absolute(columnIndex+1);
+                ans=rs.getString(1);
                 return ans;
             }catch(Exception ex) {
                 System.out.println(ex);
