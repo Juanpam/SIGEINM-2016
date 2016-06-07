@@ -75,7 +75,7 @@ public class OfficeDialog extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("Rol: ");
 
-        jButton5.setText("Buscar");
+        jButton5.setText("Buscar propiedad");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);

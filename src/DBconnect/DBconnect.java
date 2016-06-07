@@ -202,4 +202,52 @@ public class DBconnect {
         public boolean isConnected(){
             return Connected;
         }
+        
+        public int countColumnsTable(String tableName){
+            
+            try{
+                int ans;
+                String query = "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS " +
+                                "WHERE table_schema = 'test'" +
+                                "AND table_name ='"+tableName+"'";
+                rs = st.executeQuery(query);
+                //System.out.println("Records from database");
+                rs.next();
+                ans=rs.getInt(1);
+                return ans;
+            }catch(Exception ex) {
+                System.out.println(ex);
+                return 0;
+            }
+        }
+        public int countRowsTable(String tableName){
+            
+            try{
+                int ans;
+                String query = "select count(*) from "+tableName+";";
+                rs = st.executeQuery(query);
+                //System.out.println("Records from database");
+                rs.next();
+                ans=rs.getInt(1);
+                return ans;
+            }catch(Exception ex) {
+                System.out.println(ex);
+                return 0;
+            }
+        }
+        public String getValueByIndex(int rowIndex, int columnIndex, String tableName){
+            
+            try{
+                String ans;
+                String query = "select * from "+tableName+";";
+                rs = st.executeQuery(query);
+                //System.out.println("Records from database");
+                rs.absolute(rowIndex+1);
+                ans=rs.getString(columnIndex);
+                return ans;
+            }catch(Exception ex) {
+                System.out.println(ex);
+                return "";
+            }
+        }
 }
