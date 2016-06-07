@@ -6,6 +6,7 @@
 package SIGEINMLogic;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,7 +19,7 @@ public class property {
     private Integer price;
     private Integer numFloors;
     private Integer numRooms;
-    //private Array<Integer> roomsID;
+    private ArrayList<room> roomsList;
     private Integer code;
     
     public property(String address, String owner, Integer area, Integer price, Integer numFloors){
