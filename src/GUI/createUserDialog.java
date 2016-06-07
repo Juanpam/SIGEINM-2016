@@ -169,7 +169,7 @@ public class createUserDialog extends javax.swing.JDialog {
         if (IDText.getText().isEmpty() || nameText.getText().isEmpty() || passwordText.getText().isEmpty()
                 || passwordConfirmText.getText().isEmpty()) //If there is one empty field
         {
-            JOptionPane.showMessageDialog((Frame) this.getParent(), "Porfavor llene todos los campos para continuar","",JOptionPane.WARNING_MESSAGE);  
+            JOptionPane.showMessageDialog((Frame) this.getParent(), "Complete todos los campos para continuar","",JOptionPane.WARNING_MESSAGE);  
         }
         else if (!passwordText.getText().equals(passwordConfirmText.getText())){
             JOptionPane.showMessageDialog((Frame) this.getParent(), "Las contraseñas ingresadas no coinciden","",JOptionPane.WARNING_MESSAGE);  

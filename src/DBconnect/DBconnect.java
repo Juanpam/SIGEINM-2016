@@ -10,6 +10,7 @@ package DBconnect;
  *
  * @author Paula
  */
+import SIGEINMLogic.property;
 import SIGEINMLogic.user;
 import java.sql.*;
 
@@ -20,31 +21,28 @@ public class DBconnect {
 	private boolean Connected;
 	public DBconnect(){
 		try{
-			
-			Class.forName("com.mysql.jdbc.Driver");
-			//System.out.println("Build Successful");
-			con = DriverManager.getConnection("jdbc:mysql://10.147.17.226:3306/test?autoReconnect=true&useSSL=false","root","root");
-			st = con.createStatement();
-                        Connected=true;
+                    Class.forName("com.mysql.jdbc.Driver");
+                    //System.out.println("Build Successful");
+                    con = DriverManager.getConnection("jdbc:mysql://10.147.17.226:3306/test?autoReconnect=true&useSSL=false","root","root");
+                    st = con.createStatement();
+                    Connected=true;
 			
 		}catch(Exception ex){
-			
-			//System.out.println("Error: "+ex);
-                        Connected=false;
+                    //System.out.println("Error: "+ex);
+                    Connected=false;
 		}
 	}
 	
 	public void getData(){
 		try{
-			
-			String query = "select * from people";
-			rs = st.executeQuery(query);
-			System.out.println("Records from database");
-			while(rs.next()){
-				String name = rs.getString("name");
-				String age = rs.getString("age");
-				System.out.println("Name:"+name+"  "+"Age: "+age);
-			}
+                    String query = "select * from people";
+                    rs = st.executeQuery(query);
+                    System.out.println("Records from database");
+                    while(rs.next()){
+                            String name = rs.getString("name");
+                            String age = rs.getString("age");
+                            System.out.println("Name:"+name+"  "+"Age: "+age);
+                    }
 			
 		}catch(Exception ex){
 			System.out.println(ex);
@@ -55,34 +53,87 @@ public class DBconnect {
         public boolean createUser(user usuario)
         {
             try{
+                String query = "INSERT INTO user VALUES ("+"'"+usuario.getId()+"',"+"'"+usuario.getName()+"',"
+                        +"'"+usuario.getPassword()+"',"+"'"+usuario.getRole()+"'"+")";
+                PreparedStatement pstm = this.con.prepareStatement(query);
+                pstm.execute();
+                pstm.close();
+                return true;
 			
-			String query = "INSERT INTO user VALUES ("+"'"+usuario.getId()+"',"+"'"+usuario.getName()+"',"
-                                +"'"+usuario.getPassword()+"',"+"'"+usuario.getRole()+"'"+")";
-			PreparedStatement pstm = this.con.prepareStatement(query);
-                        pstm.execute();
-                        pstm.close();
-			return true;
-			
-		}catch(Exception ex){
-			System.out.println(ex);
-                        return false;
+		}
+            catch(Exception ex){
+                System.out.println(ex);
+                return false;
 		}
         }
         public boolean deleteUser(String ID)
         {
             try{
-			
-			String query = "DELETE FROM user WHERE (id=\""+ID+"\")";
-			PreparedStatement pstm = this.con.prepareStatement(query);
-                        pstm.execute();
-                        pstm.close();
-			return true;
+                String query = "DELETE FROM user WHERE (id=\""+ID+"\")";
+                PreparedStatement pstm = this.con.prepareStatement(query);
+                pstm.execute();
+                pstm.close();
+                return true;
+		}
+            catch(Exception ex){
+                System.out.println(ex);
+                return false;
+		}
+        }
+        public boolean createProperty(property propiedad)
+        {
+            try{
+                
+                Integer maxCode = 0;
+                String query = "SELECT * FROM property ORDER BY code DESC";
+                rs = st.executeQuery(query);
+                if (rs.next()){
+                    maxCode=rs.getInt("code");
+                }
+                maxCode = maxCode + 1;
+                query = "INSERT INTO property VALUES ("+maxCode.toString()+","+"'"+propiedad.getOwner()+"',"
+                        +propiedad.getArea().toString()+","+propiedad.getPrice().toString()+","+propiedad.getNumFloors().toString()+","
+                        +propiedad.getNumRooms().toString()+",'"+propiedad.getAddress()+"')";
+                PreparedStatement pstm = this.con.prepareStatement(query);
+                pstm.execute();
+                pstm.close();
+                propiedad.setCode(maxCode);
+                return true;
+
+		}catch(Exception ex){
+                    System.out.println(ex);
+                    return false;
+		}
+        }
+        public boolean deleteProperty(String code)
+        {
+            try{
+                String query = "DELETE FROM property WHERE (code=\""+code+"\")";
+                PreparedStatement pstm = this.con.prepareStatement(query);
+                pstm.execute();
+                pstm.close();
+                return true;
 			
 		}catch(Exception ex){
 			System.out.println(ex);
                         return false;
 		}
         }
+        public boolean verifyProperty(String address){
+		try{
+                    boolean ans=false;
+                    String query = "select * from property where (address=\""+address+"\")";
+                    rs = st.executeQuery(query);
+                    //System.out.println("Records from database");
+                    if (rs.next()){
+                        ans=true;
+                    }
+                    return ans;
+		}catch(Exception ex){
+			System.out.println(ex);
+                        return false;
+		}	
+	}
         public boolean verifyUserPassword(String userId, String password ){
 		try{
 			boolean ans=false;
@@ -93,7 +144,6 @@ public class DBconnect {
                             ans=true;
 			}
                         return ans;
-			
 		}catch(Exception ex){
 			System.out.println(ex);
                         return false;
@@ -101,15 +151,14 @@ public class DBconnect {
 	}
         public boolean verifyUser(String userId){
 		try{
-			boolean ans=false;
-			String query = "select * from user where (id=\""+userId+"\")";
-			rs = st.executeQuery(query);
-			//System.out.println("Records from database");
-			if (rs.next()){
-                            ans=true;
-			}
-                        return ans;
-			
+                    boolean ans=false;
+                    String query = "select * from user where (id=\""+userId+"\")";
+                    rs = st.executeQuery(query);
+                    //System.out.println("Records from database");
+                    if (rs.next()){
+                        ans=true;
+                    }
+                    return ans;
 		}catch(Exception ex){
 			System.out.println(ex);
                         return false;

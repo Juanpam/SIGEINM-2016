@@ -10,7 +10,8 @@ package SIGEINMLogic;
  * @author Minos
  */
 public class user {
-    /*This class implements the user system on the SIGEINM system.*/
+    
+    //This class implements the user system on the SIGEINM system.
     private String id;
     private String name;
     private String password;
@@ -23,7 +24,6 @@ public class user {
         this.name=name;
         this.password=password;
         this.role=role;
-        
     }
     
     public String getId()

@@ -45,7 +45,6 @@ public class AdminDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         createUserButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         closeSessionButton = new javax.swing.JButton();
@@ -59,11 +58,9 @@ public class AdminDialog extends javax.swing.JDialog {
         setResizable(false);
 
         jButton1.setText("Crear Propiedad");
-
-        jButton2.setText("Crear Inventario");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -125,7 +122,6 @@ public class AdminDialog extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                             .addComponent(createUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                             .addComponent(deleteUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(176, 176, 176))))
         );
@@ -149,17 +145,11 @@ public class AdminDialog extends javax.swing.JDialog {
                 .addComponent(deleteUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addGap(105, 105, 105))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void closeSessionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeSessionButtonActionPerformed
         // TODO add your handling code here:
@@ -181,6 +171,12 @@ public class AdminDialog extends javax.swing.JDialog {
         deleteUserDialog dialog = new deleteUserDialog((Frame) this.getParent(),true);
         this.setVisible(true);
     }//GEN-LAST:event_deleteUserButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.setVisible(false);
+        createPropertyDialog dialog = new createPropertyDialog((Frame) this.getParent(),true);
+        this.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,7 +225,6 @@ public class AdminDialog extends javax.swing.JDialog {
     private javax.swing.JButton createUserButton;
     private javax.swing.JButton deleteUserButton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
